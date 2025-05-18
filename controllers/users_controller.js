@@ -33,39 +33,47 @@ async function login(req, res) {
   }
 }
 //!-----------------------------------------------
-
 async function signup(req, res) {
   try {
-    const { email, password } = req.body;
-    console.log("email " + email + "\npassword " + password);
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      mobileNumber,
+      gender
+    } = req.body;
 
-    //! check if user aleady exist
-    const existingUser = await userModel.findOne({ email: email });
-    console.log("user " + existingUser);
+    console.log("📩 Email:", email);
+    console.log("👤 Name:", firstName, lastName);
 
+    // تحقق إذا كان المستخدم موجود مسبقًا
+    const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(400).json(
-        {
-          message: 'Email already exists',
-        },
-      );
+      return res.status(400).json({ message: 'Email already exists' });
     }
 
-    //! create new user
-    const newUser = new userModel({ email, password });
+    // إنشاء مستخدم جديد
+    const newUser = new userModel({
+      email,
+      password,
+      firstName,
+      lastName,
+      mobileNumber,
+      gender
+    });
+
     await newUser.save();
 
-    //* Encrypt payload (user)
+    // إنشاء توكن JWT
     const payload = { id: newUser._id, email: newUser.email };
-    const token = jwt.sign(
-      payload,
-      process.env.SECRET_KEY,
-    );
+    const token = jwt.sign(payload, process.env.SECRET_KEY);
 
-    res.status(201).json({token : token});
+    return res.status(201).json({ token });
 
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
+    console.error("❌ Signup error:", error.message);
+    return res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
 

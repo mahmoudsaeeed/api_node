@@ -13,7 +13,20 @@ const user_schema = mongoose.Schema({
   password : {
     'type': String,
     'requried': true,
-
+  },
+  firstName : {
+    'type': String,
+    'requried': true,
+  },
+  lastName : {
+    'type': String,
+    'requried': true,
+  },
+  mobileNumber : {
+    'type': String,
+  },
+  gender : {
+    'type': String,
   }
 
 },  {
