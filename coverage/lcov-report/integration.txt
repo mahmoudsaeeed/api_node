@@ -1,0 +1,147 @@
+const request = require('supertest');
+const mongoose = require('mongoose');
+
+const app = require('../app'); // لازم يكون عندك app.js فيه express app بدون listen()
+const userModel = require('../models/user_model');
+const productModel = require('../models/product_model');
+
+require('dotenv').config({ path: '.env' });
+
+let token;
+
+
+beforeEach(async () => {
+await mongoose.connect(process.env.MONGO_DB);
+ await userModel.deleteMany();
+
+
+  const user = await userModel.create({
+    email: 'youssef@gmail.com',
+    password: '123456',
+    firstName: 'youssef',
+    lastName: 'omar',
+    mobileNumber: '1234567890',
+    gender: 'male'
+  });
+
+ 
+  const res = await request(app)
+    .post('/api/login')
+    .send({ email: 'youssef@gmail.com', password: '123456' });
+
+  token = res.body.token;
+
+});
+
+afterAll(async () => {
+  
+  await mongoose.disconnect();
+});
+
+afterEach(async () => {
+  await userModel.deleteMany();
+    await productModel.deleteMany();
+  
+});
+
+//user integration testing
+describe('User Integration Tests', () => {
+  const userData = {
+    email: 'mahmoud@gmail.com',
+    password: '123456',
+    firstName: 'mahmoud',
+    lastName: 'saeed',
+    mobileNumber: '01012347586',
+    gender: 'male'
+  };
+
+  it('should signup a new user and return a token', async () => {
+    const res = await request(app).post('/api/signup').send(userData);
+    expect(res.statusCode).toBe(201);
+    expect(res.body.token).toBeDefined();
+  });
+
+  it('should not allow signup with existing email', async () => {
+    await request(app).post('/api/signup').send(userData);
+    const res = await request(app).post('/api/signup').send(userData);
+    expect(res.statusCode).toBe(400);
+    expect(res.body.message).toMatch(/Email already exists/);
+  });
+
+  it('should login existing user and return a token', async () => {
+    await request(app).post('/api/signup').send(userData);
+    const res = await request(app).post('/api/login').send({
+      email: userData.email,
+      password: userData.password,
+    });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.token).toBeDefined();
+  });
+
+  it('should not login with wrong password', async () => {
+    await request(app).post('/api/signup').send(userData);
+    const res = await request(app).post('/api/login').send({
+      email: userData.email,
+      password: 'wrongpass',
+    });
+    expect(res.statusCode).toBe(401);
+    expect(res.body.message).toMatch(/Invalid credentials/);
+  });
+
+  it('should fetch users with valid token', async () => {
+    await request(app).post('/api/signup').send(userData);
+    const loginRes = await request(app).post('/api/login').send({
+      email: userData.email,
+      password: userData.password,
+      
+    });
+const foundUser = res.body.find((u) => u.email === userData.email);
+
+
+    const res = await request(app)
+      .get('/api/users')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body[0].email).toBe(userData.email);
+  });
+
+  it('should not fetch users with invalid token', async () => {
+    const res = await request(app)
+      .get('/api/users')
+      .set('Authorization', `Bearer invalidtoken`);
+
+    expect(res.statusCode).toBe(403);
+  });
+});
+
+//product integration testing 
+
+describe('Product Controller Integration Tests', () => {
+
+  it('should add a new product', async () => {
+    const res = await request(app)
+      .post('/api/products')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        name: 'camera product',
+        price: 1500,
+        imageUrl: 'https://www.pexels.com/photo/black-fujifilm-dslr-camera-90946/'
+      });
+
+    expect(res.statusCode).toBe(201);
+    expect(res.body.name).toBe('camera product');
+  });
+
+  it('should fetch all products', async () => {
+    const res = await request(app)
+      .get('/api/products')
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
+
+});

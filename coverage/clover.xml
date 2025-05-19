@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1747659613861" clover="3.2.0">
+  <project timestamp="1747659613861" name="All files">
+    <metrics statements="108" coveredstatements="105" conditionals="12" coveredconditionals="12" methods="10" coveredmethods="9" elements="130" coveredelements="126" complexity="0" loc="108" ncloc="108" packages="5" files="10" classes="10"/>
+    <package name="api_node">
+      <metrics statements="19" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <file name="app.js" path="D:\University\soft2\project\api_node\app.js">
+        <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+      </file>
+      <file name="constants.js" path="D:\University\soft2\project\api_node\constants.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="api_node.controllers">
+      <metrics statements="44" coveredstatements="42" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="5"/>
+      <file name="products_controller.js" path="D:\University\soft2\project\api_node\controllers\products_controller.js">
+        <metrics statements="13" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="7" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="16" count="15" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+      </file>
+      <file name="users_controller.js" path="D:\University\soft2\project\api_node\controllers\users_controller.js">
+        <metrics statements="31" coveredstatements="30" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="6" count="19" type="stmt"/>
+        <line num="7" count="19" type="stmt"/>
+        <line num="9" count="19" type="stmt"/>
+        <line num="10" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="14" count="17" type="stmt"/>
+        <line num="15" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="16" type="stmt"/>
+        <line num="21" count="16" type="stmt"/>
+        <line num="27" count="16" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="45" count="8" type="stmt"/>
+        <line num="47" count="7" type="stmt"/>
+        <line num="48" count="7" type="stmt"/>
+        <line num="51" count="7" type="stmt"/>
+        <line num="52" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="57" count="6" type="stmt"/>
+        <line num="66" count="6" type="stmt"/>
+        <line num="69" count="6" type="stmt"/>
+        <line num="70" count="6" type="stmt"/>
+        <line num="72" count="6" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="api_node.middleware">
+      <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <file name="auth_middleware.js" path="D:\University\soft2\project\api_node\middleware\auth_middleware.js">
+        <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="5" count="23" type="stmt"/>
+        <line num="6" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="22" type="stmt"/>
+        <line num="14" count="22" type="stmt"/>
+        <line num="15" count="22" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="20" type="stmt"/>
+        <line num="18" count="20" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="api_node.models">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="product_model.js" path="D:\University\soft2\project\api_node\models\product_model.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+      </file>
+      <file name="user_model.js" path="D:\University\soft2\project\api_node\models\user_model.js">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="api_node.routes">
+      <metrics statements="22" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="endpoints.js" path="D:\University\soft2\project\api_node\routes\endpoints.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+      <file name="product_routes.js" path="D:\University\soft2\project\api_node\routes\product_routes.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+      <file name="user_routes.js" path="D:\University\soft2\project\api_node\routes\user_routes.js">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

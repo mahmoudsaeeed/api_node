@@ -44,8 +44,8 @@ async function signup(req, res) {
       gender
     } = req.body;
 
-    console.log("📩 Email:", email);
-    console.log("👤 Name:", firstName, lastName);
+    console.log(" Email:", email);
+    console.log(" Name:", firstName, lastName);
 
     // تحقق إذا كان المستخدم موجود مسبقًا
     const existingUser = await userModel.findOne({ email });
@@ -72,7 +72,7 @@ async function signup(req, res) {
     return res.status(201).json({ token });
 
   } catch (error) {
-    console.error("❌ Signup error:", error.message);
+    console.error(" Signup error:", error.message);
     return res.status(500).json({ message: 'Server error', error: error.message });
   }
 }
@@ -81,6 +81,9 @@ async function signup(req, res) {
 //? returned allUsers
 async function getUsers(req, res) {
   res.json(await userModel.find(), { "__v": 0 });
+  return res.status(200);
+
+
 }
 
 
