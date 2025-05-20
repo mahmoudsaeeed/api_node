@@ -77,11 +77,11 @@ async function signup(req, res) {
   }
 }
 
-//!-----------------------------------------------
-//? returned allUsers
-async function getUsers(req, res) {
-  res.json(await userModel.find(), { "__v": 0 });
-}
+// //!-----------------------------------------------
+// //? returned allUsers
+// async function getUsers(req, res) {
+//   res.json(await userModel.find(), { "__v": 0 });
+// }
 
 
 
@@ -91,7 +91,6 @@ async function getUsers(req, res) {
 module.exports = {
   login,
   signup,
-  getUsers,
 
 
 }

@@ -9,7 +9,7 @@ router.post(endPoints.loginEndPoint, controller.login );
 
 router.post(endPoints.signupEndPoint, controller.signup);
 
-router.get(endPoints.usersEndPoint, authunticateToken ,controller.getUsers)
+// router.get(endPoints.usersEndPoint, authunticateToken ,controller.getUsers)
 
 
 
