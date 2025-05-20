@@ -1,8 +1,8 @@
 // app.js
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user_routes/user_routes');
-const productRoutes = require('./routes/product_routes/product_routes');
+const userRoutes = require('../api_node/routes/user_routes');
+const productRoutes = require('../api_node/routes/product_routes');
 const dotenv = require('dotenv').config();
 const app = express();
 app.use(express.json());
@@ -22,3 +22,4 @@ app.use('/api/',productRoutes);
 app.listen(3000, '0.0.0.0', () => {
   console.log('Server is running on port http://localhost:3000/api/');
 });
+module.exports = app;

@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 //! validate the returned token
 function authunticateToken(req, res , next){
   const authHeader = req.headers['authorization']
@@ -7,7 +6,7 @@ function authunticateToken(req, res , next){
 
   
   if(token == null) return res.status(401).json({
-    "message": `token is null and authHeader = ${authHeader}`
+    message: `token is null and authHeader = ${authHeader}`
   })
 
   jwt.verify(token, process.env.SECRET_KEY , (err, userPlayLoad)=>{
@@ -16,8 +15,8 @@ function authunticateToken(req, res , next){
     
     req.user = userPlayLoad;
     next();
+
   })
 }
-
 
 module.exports = authunticateToken;
