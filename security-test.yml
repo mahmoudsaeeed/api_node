@@ -1,0 +1,27 @@
+config:
+  target: "http://localhost:3000/api"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+
+scenarios:
+  - name: Unauthorized access to protected endpoint
+    flow:
+      - get:
+          url: "/products"
+
+  - name: Access with invalid token
+    flow:
+      - get:
+          url: "/products"
+          headers:
+            Authorization: "Bearer faketoken123"
+
+  - name: Modify without authentication
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Test Hack"
+            price: 999
+            imageUrl: "http://fake.com"

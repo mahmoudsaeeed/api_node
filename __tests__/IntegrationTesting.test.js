@@ -9,6 +9,10 @@ require('dotenv').config({ path: '.env' });
 
 let token;
 
+//! newEdits
+// jest.mock('../models/user_model');
+
+
 
 beforeEach(async () => {
 await mongoose.connect(process.env.MONGO_DB);
@@ -28,7 +32,9 @@ await userModel.deleteMany({});
     .post('/api/login')
     .send({ email: 'youssef@gmail.com', password: '123456' });
 
+    //? youssef code
   token = res.body.token;
+  
 
   await request(app)
       .post('/api/products')
@@ -49,6 +55,9 @@ afterAll(async () => {
 afterEach(async () => {
   await userModel.deleteMany();
     await productModel.deleteMany();
+    //! newEdit
+      jest.restoreAllMocks();
+
   
 });
 
@@ -60,19 +69,29 @@ const userData = {
     mobileNumber: '01012347586',
     gender: 'male'
   };
+const newUserData = {
+    email: 'ahmed@gmail.com',
+    password: '123456',
+    firstName: 'ahemd',
+    lastName: 'saeed',
+    mobileNumber: '01012347586',
+    gender: 'male'
+  };
+
+
 
 //user integration testing
 
-describe("get all users test", () =>{
-it('should get all users', async () => {
-    const res = await request(app)
-      .get('/api/users')
-      .set('Authorization', `Bearer ${token}`);
+// describe("get all users test", () =>{
+// it('should get all users', async () => {
+//     const res = await request(app)
+//       .get('/api/users')
+//       .set('Authorization', `Bearer ${token}`);
 
-    expect(res.statusCode).toBe(200);
-});
+//     expect(res.statusCode).toBe(200);
+// });
 
-});
+// });
 
 describe('User Integration Tests', () => {
  
@@ -90,13 +109,18 @@ describe('User Integration Tests', () => {
   });
 
   it('can not create a new user and return a token', async () => {
-    const res = await (await request(app).post('/api/signup')).create({
-    email: 'turky@gmail.com',
-    password: 'vscode',
-    firstName: 'turky',
-    lastName: 'tharwat',
+    //? youssef code
+    // const res = await (await request(app).post('/api/signup')).create({
+    // email: 'turky@gmail.com',
+    // password: 'vscode',
+    // firstName: 'turky',
+    // lastName: 'tharwat',
 
-    });
+    // });
+
+    //? my_edit
+    const res = await request(app).post('/api/signup').send(newUserData);
+
 
    expect(res.statusCode).toBe(500);
    expect(res.body.message).toMatch(/'Server error/);
@@ -143,13 +167,23 @@ describe('User Integration Tests', () => {
     expect(res.body.message).toMatch(/Email is not registered/);
   });
    
- 
+ jest.mock('../models/user_model'); // افترض أن هذا هو المسار
+
   it('should return server error', async () => {
+
+    //! myEdits
+     jest.spyOn(userModel, 'findOne').mockImplementation(() => {
+  throw new Error('Database error');
+});
+
+
     
     const res = await request(app).post('/api/login').send({
-      email:"turky",
+      email:"youssef@gmail.com",
       password:userData.password,
     });
+
+    
    expect(res.statusCode).toBe(500);
    expect(res.body.message).toMatch(/'Server error/);
 
@@ -158,38 +192,6 @@ describe('User Integration Tests', () => {
 
 });
   
-describe("fetch user test", () =>{
- it('should fetch users with valid token', async () => {
-    await request(app).post('/api/signup').send(userData);
-    const loginRes = await request(app).post('/api/login').send({
-      email: userData.email,
-      password: userData.password,
-      
-    });
-const foundUser = res.body.find((u) => u.email === userData.email);
-
-
-    const res = await request(app)
-      .get('/api/users')
-      .set('Authorization', `Bearer ${token}`);
-
-    expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0].email).toBe(userData.email);
-  });
-
-  it('should not fetch users with invalid token', async () => {
-    const res = await request(app)
-      .get('/api/users')
-      .set('Authorization', `Bearer invalidtoken`);
-
-    expect(res.statusCode).toBe(403);
-  });
-
-});
- 
-
-
 //product integration testing 
 
 describe('Product Controller Integration Tests', () => {
@@ -210,12 +212,18 @@ describe('Product Controller Integration Tests', () => {
   
   
   it('can not add a new product', async () => {
+    //? myEdits -------------
+     jest.spyOn(productModel, 'create').mockImplementation(() => {
+    throw new Error('Database error');
+  });
+
+    //?-----------------
     const res = await request(app)
       .post('/api/products')
       .set('Authorization', `Bearer ${token}`)
       .send({
         name:'camera product',
-        price: "youssef@gmail.com",
+        price: 3000,
         imageUrl:'https://www.pexels.com/photo/black-fujifilm-dslr-camera-90946/'
       });
 
@@ -237,10 +245,18 @@ it('should fetch all products', async () => {
   });
 
 it('can not  fetch all products', async () => {
-    const res = await request(app)
-      .get('/api/products/camera')
-      .set('Authorization', `Bearer ${token}`);
+  //? myEdits -----
+  jest.spyOn(productModel, 'find').mockImplementation(() => {
+  throw new Error('Database error');
+});
 
+//? ---------
+
+    const res = await request(app)
+      .get('/api/products')
+      .set('Authorization', `Bearer ${token}`);
+    console.log(`Res = ${res}`);
+    
     expect(res.statusCode).toBe(500);
     expect(res.body.message).toMatch(/Failed to fetch products/);
    

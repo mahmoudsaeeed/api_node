@@ -77,14 +77,14 @@ async function signup(req, res) {
   }
 }
 
-//!-----------------------------------------------
-//? returned allUsers
-async function getUsers(req, res) {
-  res.json(await userModel.find(), { "__v": 0 });
-  return res.status(200);
+// //!-----------------------------------------------
+// //? returned allUsers
+// async function getUsers(req, res) {
+//   res.json(await userModel.find(), { "__v": 0 });
+//   return res.status(200);
 
 
-}
+// }
 
 
 

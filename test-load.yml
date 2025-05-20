@@ -1,0 +1,44 @@
+config:
+  target: "http://localhost:3000/api"
+  phases:
+    - duration: 30
+      arrivalRate: 3
+  payload:
+    path: "users.csv"
+    fields:
+      - email
+      - password
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: Full User Flow
+    flow:
+      - post:
+          url: "/login"
+          json:
+            email: "{{ email }}"
+            password: "{{ password }}"
+          capture:
+            - json: "$.token"
+              as: token
+
+      - get:
+          url: "/users"
+          headers:
+            Authorization: "Bearer {{ token }}"
+
+      - get:
+          url: "/products"
+          headers:
+            Authorization: "Bearer {{ token }}"
+
+      - post:
+          url: "/products"
+          headers:
+            Authorization: "Bearer {{ token }}"
+          json:
+            name: "Artillery Test Product"
+            price: 100
+            imageUrl: "https://via.placeholder.com/150"
